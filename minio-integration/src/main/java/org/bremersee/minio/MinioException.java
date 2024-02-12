@@ -16,6 +16,7 @@
 
 package org.bremersee.minio;
 
+import java.io.Serial;
 import lombok.EqualsAndHashCode;
 import org.bremersee.exception.ErrorCodeAware;
 import org.bremersee.exception.HttpStatusAware;
@@ -29,6 +30,7 @@ import org.bremersee.exception.ServiceException;
 @EqualsAndHashCode(callSuper = true)
 public class MinioException extends ServiceException implements HttpStatusAware, ErrorCodeAware {
 
+  @Serial
   private static final long serialVersionUID = 1L;
 
   /**

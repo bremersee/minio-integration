@@ -30,7 +30,7 @@ public interface MinioClientCallback<T> {
    * Do with minio client.
    *
    * @param minioClient the minio client
-   * @return the the result
+   * @return the result
    * @throws Exception the exception
    */
   T doWithMinioClient(MinioClient minioClient) throws Exception;

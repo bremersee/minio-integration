@@ -124,7 +124,6 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -835,7 +834,9 @@ public class MinioTemplateTest {
     try {
       file = File.createTempFile(
           "junit", ".tmp", new File(System.getProperty("java.io.tmpdir")));
-      assertTrue(file.delete());
+      if (playMinioEnabled) {
+        Files.delete(file.toPath());
+      }
       minio.downloadObject(DownloadObjectArgs.builder()
           .bucket(DEFAULT_BUCKET)
           .object(objectName)
@@ -1363,7 +1364,7 @@ public class MinioTemplateTest {
   void objectRetention() {
     String bucket = newBucketName();
     String objectName = UUID.randomUUID() + ".txt";
-    ZonedDateTime until = ZonedDateTime.now().plus(10L, ChronoUnit.SECONDS);
+    ZonedDateTime until = ZonedDateTime.now().plusSeconds(10L);
 
     MinioTemplate minio = minioTemplate("objectRetention", mock -> {
       when(mock.putObject(any(PutObjectArgs.class)))

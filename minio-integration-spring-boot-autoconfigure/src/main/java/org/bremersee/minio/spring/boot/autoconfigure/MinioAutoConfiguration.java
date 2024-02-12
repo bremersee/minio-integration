@@ -23,13 +23,13 @@ import org.bremersee.minio.MinioErrorHandler;
 import org.bremersee.minio.MinioOperations;
 import org.bremersee.minio.MinioTemplate;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.springframework.util.ClassUtils;
 
@@ -38,7 +38,7 @@ import org.springframework.util.ClassUtils;
  *
  * @author Christian Bremer
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnClass({
     MinioClient.class,
     MinioTemplate.class
@@ -66,12 +66,13 @@ public class MinioAutoConfiguration {
    */
   @EventListener(ApplicationReadyEvent.class)
   public void init() {
-    log.info("\n"
-            + "*********************************************************************************\n"
-            + "* {}\n"
-            + "*********************************************************************************\n"
-            + "* properties = {}\n"
-            + "*********************************************************************************",
+    log.info("""
+
+            *********************************************************************************
+            * {}
+            *********************************************************************************
+            * properties = {}
+            *********************************************************************************""",
         ClassUtils.getUserClass(getClass()).getSimpleName(),
         properties);
   }
