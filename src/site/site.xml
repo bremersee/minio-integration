@@ -43,7 +43,6 @@
         <item name="Maven" href="https://maven.apache.org"/>
     </links>
     -->
-		<menu ref="modules"/>
 		<menu ref="reports"/>
 		<footer><![CDATA[<p>&copy;${project.inceptionYear} ${project.organization.name}</p>]]></footer>
 	</body>
