@@ -18,9 +18,11 @@ package org.bremersee.minio;
 
 import java.io.Serial;
 import lombok.EqualsAndHashCode;
+import org.bremersee.exception.AbstractServiceExceptionBuilder;
 import org.bremersee.exception.ErrorCodeAware;
 import org.bremersee.exception.HttpStatusAware;
 import org.bremersee.exception.ServiceException;
+import org.bremersee.exception.ServiceExceptionBuilder;
 
 /**
  * The minio exception.
@@ -47,6 +49,29 @@ public class MinioException extends ServiceException implements HttpStatusAware,
       final String reason,
       final Throwable cause) {
     super(httpStatus, errorCode, reason, cause);
+  }
+
+  /**
+   * Creates new exception builder.
+   *
+   * @return the builder
+   */
+  public static ServiceExceptionBuilder<? extends MinioException> builder() {
+
+    return new AbstractServiceExceptionBuilder<>() {
+
+      @Serial
+      private static final long serialVersionUID = 2L;
+
+      @Override
+      protected MinioException buildWith(
+          int httpStatus,
+          String errorCode,
+          String reason,
+          Throwable cause) {
+        return new MinioException(httpStatus, errorCode, reason, cause);
+      }
+    };
   }
 
 }
