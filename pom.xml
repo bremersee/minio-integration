@@ -11,7 +11,7 @@
     <relativePath/>
   </parent>
 
-  <artifactId>minio-integration-parent</artifactId>
+  <artifactId>minio-integration</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>Minio Integration</name>
   <description>Minio Integration</description>
